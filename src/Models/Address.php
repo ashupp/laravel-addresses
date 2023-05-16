@@ -6,7 +6,7 @@ namespace Rinvex\Addresses\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Jackpopp\GeoDistance\GeoDistanceTrait;
+//use Jackpopp\GeoDistance\GeoDistanceTrait;
 use Rinvex\Support\Traits\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -70,11 +70,11 @@ class Address extends Model
     use HasFactory;
     use SoftDeletes;
     use ValidatingTrait;
-    use GeoDistanceTrait;
+    //use GeoDistanceTrait;
 
-    protected $latColumn = 'latitude';
+    //protected $latColumn = 'latitude';
 
-    protected $lngColumn = 'longitude';
+    //protected $lngColumn = 'longitude';
 
     /**
      * {@inheritdoc}
@@ -264,7 +264,7 @@ class Address extends Model
         parent::boot();
 
         static::saving(function (self $address) {
-            $geocoding = config('rinvex.addresses.geocoding.enabled');
+            /*$geocoding = config('rinvex.addresses.geocoding.enabled');
             $geocoding_api_key = config('rinvex.addresses.geocoding.api_key');
             if ($geocoding && $geocoding_api_key) {
                 $segments[] = $address->street;
@@ -280,7 +280,7 @@ class Address extends Model
                     $address->latitude = $geocode->results[0]->geometry->location->lat;
                     $address->longitude = $geocode->results[0]->geometry->location->lng;
                 }
-            }
+            }*/
         });
     }
 }
