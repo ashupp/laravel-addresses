@@ -21,9 +21,9 @@ class AddressesServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        MigrateCommand::class => 'command.rinvex.addresses.migrate',
-        PublishCommand::class => 'command.rinvex.addresses.publish',
-        RollbackCommand::class => 'command.rinvex.addresses.rollback',
+        \Rinvex\Addresses\Console\Commands\MigrateCommand::class,
+        \Rinvex\Addresses\Console\Commands\PublishCommand::class,
+        \Rinvex\Addresses\Console\Commands\RollbackCommand::class,
     ];
 
     /**
@@ -40,7 +40,9 @@ class AddressesServiceProvider extends ServiceProvider
         ]);
 
         // Register console commands
-        $this->registerCommands($this->commands);
+        if ($this->app->runningInConsole()) {
+            $this->commands($this->commands);
+        }
     }
 
     /**
