@@ -50,9 +50,17 @@ class AddressesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Publish Resources
-        $this->publishesConfig('rinvex/laravel-addresses');
-        $this->publishesMigrations('rinvex/laravel-addresses');
-        ! $this->autoloadMigrations('rinvex/laravel-addresses') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        // Konfigurationsdateien veröffentlichen
+        $this->publishes([
+            __DIR__.'/../../config/config.php' => config_path('rinvex.addresses.php'),
+        ], 'config');
+
+        // Migrations veröffentlichen
+        $this->publishes([
+            __DIR__.'/../../database/migrations/' => database_path('migrations'),
+        ], 'migrations');
+
+        // Migrations automatisch laden
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }
